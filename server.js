@@ -8,7 +8,7 @@ require('dotenv').config();
 const PORT = process.env.PORT || 3000;
 
 // Allow requests from Netlify domain
-const allowedOrigins = ['https://main--mkdroneandmedia.netlify.app'];
+const allowedOrigins = ['*'];
 
 
 const corsOptions = {
@@ -27,7 +27,7 @@ app.use(express.json())
 
 // CORS middleware 
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'https://main--mkdroneandmedia.netlify.app'); // Replace '*' with specific allowed origins
+    res.header('Access-Control-Allow-Origin', '*'); // Replace '*' with specific allowed origins
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     next();
