@@ -8,7 +8,7 @@ require('dotenv').config();
 const PORT = process.env.PORT || 3000;
 
 // Allow requests from Netlify domain
-const allowedOrigins = ['https://mkdroneandmedia.netlify.app', 'https://main--mkdroneandmedia.netlify.app'];
+const allowedOrigins = ['https://main--mkdroneandmedia.netlify.app'];
 
 
 const corsOptions = {
