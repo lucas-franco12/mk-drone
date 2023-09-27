@@ -1,14 +1,29 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
+const cors = require('cors');
 const app = express();
 require('dotenv').config();
 
 
 const PORT = process.env.PORT || 3000;
 
+// Allow requests from Netlify domain
+const allowedOrigins = ['https://mkdroneandmedia.netlify.app'];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
+
 // Middleware
 app.use(express.static('public'));
 app.use(express.json())
+app.use(cors(corsOptions));
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html')
