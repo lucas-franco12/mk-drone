@@ -88,7 +88,7 @@ contactForm.addEventListener('submit', (e) => {
   }
 
   let xhr = new XMLHttpRequest();
-  xhr.open('POST', '/'); 
+  xhr.open('POST', 'https://mkdroneandmedia.netlify.app/'); // only thing that doesnt gieve a 404
   xhr.setRequestHeader('content-type', 'application/json');
   xhr.onload = function() {
     console.log(xhr.responseText); 
