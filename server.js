@@ -1,39 +1,21 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
-const cors = require('cors');
 const app = express();
-require('dotenv').config();
-
 
 const PORT = process.env.PORT || 3000;
-
-// Allow requests from Netlify domain
-const allowedOrigins = ['https://mkdroneandmedia.netlify.app'];
-
-
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-};
 
 // Middleware
 app.use(express.static('public'));
 app.use(express.json())
 
-// CORS middleware 
+// Middleware for setting CORS headers
 app.use((req, res, next) => {
-    app.use((req, res, next) => {
-        res.header('Access-Control-Allow-Origin', 'https://mkdroneandmedia.netlify.app'); // Replace '*' with specific allowed origins
-        res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-        next();
-    });
+    res.header('Access-Control-Allow-Origin', '*'); // Replace '*' with specific allowed origins
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
   });
+  
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html')
@@ -45,10 +27,10 @@ app.post('/', (req, res) => {
     const transportToDev = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: process.env.DEV_GMAIL_USER,
-            pass: process.env.DEV_GMAIL_PASSWORD
-        },
-    });
+            user: 'lukefranc3@gmail.com',
+            pass: 'paoottpbcnusbqqk'
+        }
+    })
 
     // const transportToClient = nodemailer.createTransport({
     //     service: 'gmail',
@@ -67,7 +49,6 @@ app.post('/', (req, res) => {
         Last name: ${req.body.lastName}
         Email: ${req.body.email}
         Phone number: ${req.body.number}
-
         Message: 
         ${req.body.message}
         `

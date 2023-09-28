@@ -24,7 +24,7 @@ let lastName = document.getElementById('last-name');
 let email = document.getElementById('email');
 let number = document.getElementById('number');
 let message= document.getElementById('message');
-  
+
 // Authenticate Data
 function isValidEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -88,7 +88,7 @@ contactForm.addEventListener('submit', (e) => {
   }
 
   let xhr = new XMLHttpRequest();
-  xhr.open('POST', 'https://mkdroneandmedia.netlify.app/'); // only thing that doesnt gieve a 404
+  xhr.open('POST', '/');
   xhr.setRequestHeader('content-type', 'application/json');
   xhr.onload = function() {
     console.log(xhr.responseText); 
@@ -104,6 +104,4 @@ contactForm.addEventListener('submit', (e) => {
     }
   };
   xhr.send(JSON.stringify(formData));
-  
 });
-
